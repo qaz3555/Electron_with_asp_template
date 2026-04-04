@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Electron",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/desktop",
+      "runtimeExecutable": "npm.cmd",
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
+      "preLaunchTask": "prepare-dev-services",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "outputCapture": "std"
+    },
+    {
+      "name": "Attach .NET Backend",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack Dev",
+      "configurations": [
+        "Electron"
+      ]
+    },
+    {
+      "name": "Full Stack Dev + Pick Backend",
+      "configurations": [
+        "Electron",
+        "Attach .NET Backend"
+      ]
+    }
+  ]
+}

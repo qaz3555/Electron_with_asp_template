@@ -1,0 +1,48 @@
+import { useState } from "react";
+
+declare global {
+  interface Window {
+    desktopApi?: {
+      getApiBaseUrl: () => string;
+    };
+  }
+}
+
+function App() {
+  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const callApi = async () => {
+    try {
+      setLoading(true);
+
+      const baseUrl =
+        window.desktopApi?.getApiBaseUrl() ?? "http://localhost:5050";
+
+      const res = await fetch(`${baseUrl}/api/hello`);
+      const data = await res.json();
+      setResult(data);
+    } catch (err: any) {
+      setResult({
+        error: err?.message ?? "unknown error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+      <h1>Electron + React + ASP.NET Core</h1>
+      <button onClick={callApi} disabled={loading}>
+        {loading ? "Loading..." : "Call API"}
+      </button>
+
+      <pre style={{ marginTop: 16, background: "#f4f4f4", padding: 16 }}>
+        {JSON.stringify(result, null, 2)}
+      </pre>
+    </div>
+  );
+}
+
+export default App;

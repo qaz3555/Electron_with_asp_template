@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run-backend",
+      "type": "shell",
+      "command": "cmd",
+      "isBackground": true,
+      "args": [
+        "/c",
+        "cmd /k dotnet watch run"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend/MyBackend"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "watching",
+          "endsPattern": "Now listening on" 
+        }
+      }
+    },
+    {
+      "label": "run-frontend",
+      "type": "shell",
+      "command": "cmd",
+      "isBackground": true,
+      "args": [
+        "/c",
+        "cmd /k npm run dev"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE",
+          "endsPattern": "ready in"
+        }
+      }
+    },
+    {
+      "label": "prepare-dev-services",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "timeout /t 2 >nul && npx wait-on tcp:localhost:5050 tcp:localhost:5173"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/desktop"
+      },
+      "dependsOn": [
+        "run-backend",
+        "run-frontend"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}
