@@ -17,7 +17,7 @@ function App() {
       setLoading(true);
 
       const baseUrl =
-        window.desktopApi?.getApiBaseUrl() ?? "http://localhost:5050";
+        window.desktopApi?.getApiBaseUrl() ?? import.meta.env.VITE_API_BASE_URL ?? "http://localhost:5050";
 
       const res = await fetch(`${baseUrl}/api/hello`);
       const data = await res.json();
