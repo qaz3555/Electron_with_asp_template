@@ -105,6 +105,36 @@ In dev mode, Electron does **not** spawn the backend — you must start it manua
 
 ## Build & Package
 
+### Before Building — Configure `electron_build_config.yaml`
+
+Electron version and ZIP source are controlled by **`electron_build_config.yaml`** in the repo root:
+
+```yaml
+electronVersion: "41.1.1"
+electronZipDir: "."   # directory (relative to repo root) containing the pre-downloaded ZIP
+                      # omit or leave empty to download from the internet
+```
+
+If `electronZipDir` is set, place the matching ZIP in that directory before building:
+
+```
+electron-v{VERSION}-{PLATFORM}-x64.zip
+```
+
+Examples:
+```
+electron-v41.1.1-win32-x64.zip    # Windows
+electron-v41.1.1-linux-x64.zip    # Linux
+electron-v41.1.1-darwin-x64.zip   # macOS
+```
+
+When upgrading Electron:
+1. Update `electronVersion` in `electron_build_config.yaml`
+2. Update the `"electron"` version in `desktop/package.json` to match
+3. Place the new matching ZIP in the configured directory (or remove `electronZipDir` to download online)
+
+---
+
 One-command build (requires Git Bash or WSL on Windows):
 ```bash
 ./scripts/build.sh

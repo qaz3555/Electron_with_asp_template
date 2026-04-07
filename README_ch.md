@@ -105,7 +105,37 @@ npm start
 
 ## 建置與打包
 
-使用scipt一鍵建置（Windows 請使用 Git Bash 或 WSL）：
+### 建置前置作業 — 設定 `electron_build_config.yaml`
+
+Electron 版本與 ZIP 來源由專案根目錄的 **`electron_build_config.yaml`** 統一管理：
+
+```yaml
+electronVersion: "41.1.1"
+electronZipDir: "."   # 存放預先下載 ZIP 的目錄（相對於專案根目錄）
+                      # 省略或留空則改為從網路下載
+```
+
+若設定了 `electronZipDir`，請在建置前將對應的 ZIP 放入該目錄：
+
+```
+electron-v{版本號}-{平台}-x64.zip
+```
+
+範例：
+```
+electron-v41.1.1-win32-x64.zip    # Windows
+electron-v41.1.1-linux-x64.zip    # Linux
+electron-v41.1.1-darwin-x64.zip   # macOS
+```
+
+升級 Electron 時請依序：
+1. 更新 `electron_build_config.yaml` 中的 `electronVersion`
+2. 更新 `desktop/package.json` 中的 `"electron"` 版本使其一致
+3. 將新版本對應的 ZIP 放至設定的目錄（或移除 `electronZipDir` 改為從網路下載）
+
+---
+
+使用 script 一鍵建置（Windows 請使用 Git Bash 或 WSL）：
 ```bash
 ./scripts/build.sh
 ```

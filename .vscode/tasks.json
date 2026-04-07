@@ -4,12 +4,19 @@
     {
       "label": "run-backend",
       "type": "shell",
-      "command": "cmd",
       "isBackground": true,
-      "args": [
-        "/c",
-        "cmd /k dotnet watch run"
-      ],
+      "windows": {
+        "command": "cmd",
+        "args": ["/c", "cmd /k dotnet watch run"]
+      },
+      "linux": {
+        "command": "bash",
+        "args": ["-c", "dotnet watch run"]
+      },
+      "osx": {
+        "command": "bash",
+        "args": ["-c", "dotnet watch run"]
+      },
       "options": {
         "cwd": "${workspaceFolder}/backend/MyBackend"
       },
@@ -20,19 +27,26 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": "watching",
-          "endsPattern": "Now listening on" 
+          "endsPattern": "Now listening on"
         }
       }
     },
     {
       "label": "run-frontend",
       "type": "shell",
-      "command": "cmd",
       "isBackground": true,
-      "args": [
-        "/c",
-        "cmd /k npm run dev"
-      ],
+      "windows": {
+        "command": "cmd",
+        "args": ["/c", "cmd /k npm run dev"]
+      },
+      "linux": {
+        "command": "bash",
+        "args": ["-c", "npm run dev"]
+      },
+      "osx": {
+        "command": "bash",
+        "args": ["-c", "npm run dev"]
+      },
       "options": {
         "cwd": "${workspaceFolder}/frontend"
       },
@@ -50,11 +64,18 @@
     {
       "label": "prepare-dev-services",
       "type": "shell",
-      "command": "cmd",
-      "args": [
-        "/c",
-        "timeout /t 2 >nul && npx wait-on tcp:localhost:5050 tcp:localhost:5173"
-      ],
+      "windows": {
+        "command": "cmd",
+        "args": ["/c", "timeout /t 2 >nul && npx wait-on tcp:localhost:5050 tcp:localhost:5173"]
+      },
+      "linux": {
+        "command": "bash",
+        "args": ["-c", "sleep 2 && npx wait-on tcp:localhost:5050 tcp:localhost:5173"]
+      },
+      "osx": {
+        "command": "bash",
+        "args": ["-c", "sleep 2 && npx wait-on tcp:localhost:5050 tcp:localhost:5173"]
+      },
       "options": {
         "cwd": "${workspaceFolder}/desktop"
       },

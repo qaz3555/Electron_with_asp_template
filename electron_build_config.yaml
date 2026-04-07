@@ -1,0 +1,28 @@
+# Electron Build Configuration
+#
+# electronVersion: (required) Must match the "electron" version in desktop/package.json
+#
+# electronZipDir: (optional) Path to the directory containing the pre-downloaded Electron ZIP,
+#                 relative to the repo root. The ZIP must be named:
+#                   electron-v{electronVersion}-{platform}-x64.zip
+#                 e.g. electron-v41.1.1-win32-x64.zip    # Windows
+#                      electron-v41.1.1-linux-x64.zip    # Linux
+#                      electron-v41.1.1-darwin-x64.zip   # macOS
+#                 Omit or leave empty to download from the internet during packaging.
+#
+# makers: (optional) List of output formats to produce. Each entry only runs on its
+#         supported platform — unsupported makers are silently skipped.
+#
+#   squirrel  Windows  .exe installer (Squirrel)
+#   zip       All      portable .zip
+#   deb       Linux    .deb package
+#   rpm       Linux    .rpm package
+#   dmg       macOS    .dmg installer
+#
+#         Omit the makers key entirely to use the default: [squirrel, zip]
+
+electronVersion: "41.1.1"
+electronZipDir: "."
+makers:
+  # - squirrel
+  - zip
