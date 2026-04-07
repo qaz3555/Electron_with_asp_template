@@ -1,5 +1,10 @@
 const { contextBridge } = require("electron");
 
+// Receive the port assigned to this instance's backend via additionalArguments.
+// Falls back to 5050 (dev mode where backend is started manually).
+const apiPortArg = process.argv.find((a) => a.startsWith("--api-port="));
+const apiPort = apiPortArg ? apiPortArg.split("=")[1] : "5050";
+
 contextBridge.exposeInMainWorld("desktopApi", {
-  getApiBaseUrl: () => process.env.API_BASE_URL ?? "http://localhost:5050"
+  getApiBaseUrl: () => `http://localhost:${apiPort}`,
 });

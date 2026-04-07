@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 declare global {
   interface Window {
@@ -32,15 +33,13 @@ function App() {
   };
 
   return (
-    <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+    <div className="app">
       <h1>Electron + React + ASP.NET Core</h1>
       <button onClick={callApi} disabled={loading}>
         {loading ? "Loading..." : "Call API"}
       </button>
 
-      <pre style={{ marginTop: 16, background: "#f4f4f4", padding: 16 }}>
-        {JSON.stringify(result, null, 2)}
-      </pre>
+      <pre className="result">{JSON.stringify(result, null, 2)}</pre>
     </div>
   );
 }

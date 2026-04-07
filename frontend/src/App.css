@@ -182,3 +182,28 @@
     border-right-color: var(--border);
   }
 }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#results {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .result {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    width: 300px;
+    box-sizing: border-box;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyBackend.Controllers;
@@ -12,7 +13,9 @@ public class HelloController : ControllerBase
         return Ok(new
         {
             message = "Hello from ASP.NET Core",
-            time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            pid = Environment.ProcessId,
+            port = new Uri(HttpContext.Request.GetDisplayUrl()).Port
         });
     }
 }
